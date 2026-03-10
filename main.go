@@ -12,7 +12,7 @@ func main(){
 	godotenv.Load()
 	fmt.Println("Welcome to Omniscient Penguin!")
 	fmt.Println("Type a linux command to get an explanation or type what you want")
-	fmt.Println("type quit() to exit")
+	fmt.Println("Type quit() to exit")
 	fmt.Println()
 
 
