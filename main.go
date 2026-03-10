@@ -15,20 +15,22 @@ func main(){
 	res,err:=parseText("")
 	fmt.Println(res)
     fmt.Println(err)
+	res1:=manPageGen("git")
+	fmt.Println(res1)
 
 
 	sc:=bufio.NewScanner(os.Stdin)
 
 	for{
-		fmt.Print("omnipen> ")
+		fmt.Print("omnipen: ")
 		sc.Scan()
-		command:=sc.Text()
+		input:=sc.Text()
 
-		if command=="quit()"{
+		if input=="quit()"{
 			break
 		}
 
-
+		
 	}
 
 }
