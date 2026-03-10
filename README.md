@@ -46,7 +46,7 @@ On a basic level, it fetches the related man pages from user input (if it can, a
 ### 1. Clone the repo
 
 ```bash
-git clone https://github.com/your_github_username/omnipen
+git clone https://github.com/rawmeat21/omnipen
 cd omnipen
 ```
 
