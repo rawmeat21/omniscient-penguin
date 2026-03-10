@@ -32,7 +32,8 @@ func explain (input string,manpages string,level string) (string,error){
 
 	prompt:=fmt.Sprintf(`You are a Linux system admin. A user has given you the follwing input text inside the double quotes: "%s"
 		Note that the text may either be a command or something that the user wants to get done on their Linux system.
-		If it's neither then reply with only a 'INVALID'. If not, generate an explaination of the following level- `,input)
+		If it's neither then reply with only a 'INVALID' only.Do not say things like "This is not related to linux", just say INVALID and quit.
+		If not, generate an explaination of the following level- `,input)
 
 	switch level{
 	case "h":
@@ -58,6 +59,7 @@ func explain (input string,manpages string,level string) (string,error){
 		OR if the user wants to do something:
 
 		List relevant commands that get the job done and how exactly they get the job done. Follow the above rules for explaining each command you type.
+		However don't describe by points, just explain it normally, like you are a sysadmin
 		`
 	case "l":
 		prompt+=`low level
@@ -75,6 +77,7 @@ func explain (input string,manpages string,level string) (string,error){
 		OR if the user wants to do something:
 
 		List relevant commands that get the job done and how exactly they get the job done. Follow the above rules for explaining each command you type.
+		However don't describe by points, just explain it normally, like you are a sysadmin
 		`
 	}
 
@@ -82,7 +85,8 @@ func explain (input string,manpages string,level string) (string,error){
 
 	%s
 
-	(Note that man pages may not exist, in which case you are to generate an explaination using your knowledge adhering to the rules above)`,manpages)
+	(Note that man pages may not exist, in which case you are to generate an explaination using your knowledge adhering to the rules above)
+	Do not address the user EVER, explain it formally`,manpages)
 
 
 	key:=os.Getenv("OMNIPEN_API_KEY")
@@ -113,7 +117,7 @@ func explain (input string,manpages string,level string) (string,error){
 	if(err!=nil){
 		return "",err
 	}
-	
+
 	defer resp.Body.Close()
 
 	data,err:=io.ReadAll(resp.Body)
