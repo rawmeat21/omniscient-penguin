@@ -6,7 +6,7 @@ import (
 	"os"
 	"os/exec"
 	"strings"
-
+	"github.com/chzyer/readline"
 	"github.com/joho/godotenv"
 )
 
@@ -19,12 +19,16 @@ func main(){
 
 
 	sc:=bufio.NewScanner(os.Stdin)
-
+	
 	promptText:=ColourPrompt+"omnipen: "+ColourReset
+	readline,err:=readline.New(promptText)
+
+	if(err!=nil){
+		panic(err)
+	}
+
 	for{
-		fmt.Print(promptText)
-		sc.Scan()
-		input:=sc.Text()
+		input,err:=readline.Readline()
 
 		if input=="quit()"{
 			break
@@ -100,5 +104,4 @@ func main(){
 		fmt.Println()
 		fmt.Println()	
 	}
-
 }

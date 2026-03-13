@@ -6,24 +6,10 @@ This is a CLI tool that has 2 purposes:
 2. Given something that a user wants to get done, it lists the 
 possible commands that could help accomplish that task
 
-```
-$ ./omnipen
-Welcome to Omniscient Penguin!
-Type a linux command to get an explanation or type what you want
-Type quit() to exit
+![Example use](./examples/use1.png)
 
-omnipen: grep "error" /var/log/syslog | sort -u
-omnipen: How low do you want to go (h, m or l) (default=h)? m
 
-This command is used to find and list unique error messages from the system log file.
-
-Here's how it works:
-
-- `grep "error" /var/log/syslog` searches for the word "error" in the system log file and displays the lines containing it.
-- `sort -u` sorts these lines in ascending order and removes duplicates, so only unique error messages are shown.
-
-omnipen: 
-```
+![Example use](./examples/use2.png)
 
 ## Complexity Levels
 

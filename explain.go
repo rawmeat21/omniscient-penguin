@@ -7,6 +7,7 @@ import (
 	"io"
 	"net/http"
 	"os"
+
 )
 
 type Message struct {
@@ -42,7 +43,7 @@ func explain (input string,manpages string,level string) (string,error){
 
 		OR if the user wants to do something:
 
-		List relevant commands that get the job done. Follow the above rules for explaining each command you type.
+		List relevant command statemnts that get the job done (List the whole statement). Follow the above rules for explaining each command you type.
 		`
 	case "m":
 		prompt+=`middle level (lower than high level, but higher than low level)
@@ -58,7 +59,7 @@ func explain (input string,manpages string,level string) (string,error){
 
 		OR if the user wants to do something:
 
-		List relevant commands that get the job done and how exactly they get the job done. Follow the above rules for explaining each command you type.
+		List relevant commands (state full commands) that get the job done and how exactly they get the job done. Follow the above rules for explaining each command you type.
 		However don't describe by points, just explain it normally, like you are a sysadmin
 		`
 	case "l":
@@ -76,7 +77,7 @@ func explain (input string,manpages string,level string) (string,error){
 
 		OR if the user wants to do something:
 
-		List relevant commands that get the job done and how exactly they get the job done. Follow the above rules for explaining each command you type.
+		List relevant commands (state full commands) that get the job done and how exactly they get the job done. Follow the above rules for explaining each command you type.
 		However don't describe by points, just explain it normally, like you are a sysadmin
 		`
 	}
@@ -86,7 +87,9 @@ func explain (input string,manpages string,level string) (string,error){
 	%s
 
 	(Note that man pages may not exist, in which case you are to generate an explaination using your knowledge adhering to the rules above)
-	Do not address the user EVER, explain it formally. YOUR OUTPUT MUST CONTAIN ONLY INFORMATION. IT MUST NOT CONTAIN REDUNDANT NON IMPORTANT STUFF LIKE NATURE OF TEXT, WHETHER ITS A COMMAND OR PROMPT, THOSE THINGS ARE NOT IMPORTANT`,manpages)
+	Do not address the user EVER, explain it formally. YOUR OUTPUT MUST CONTAIN ONLY INFORMATION. 
+	IT MUST NOT CONTAIN REDUNDANT NON IMPORTANT STUFF LIKE NATURE OF TEXT, WHETHER ITS A COMMAND OR PROMPT, THOSE THINGS ARE NOT IMPORTANT
+	Give an example too on how to use the commands`,manpages)
 
 
 	key:=os.Getenv("OMNIPEN_API_KEY")
