@@ -32,7 +32,7 @@ func explain (input string,manpages string,level string) (string,error){
 
 	prompt:=fmt.Sprintf(`You are a Linux system admin. A user has given you the follwing input text inside the double quotes: "%s"
 		Note that the text may either be a command or something that the user wants to get done on their Linux system.
-		If it's neither then reply with only a 'INVALID' only.Do not say things like "This is not related to linux", just say INVALID and quit.
+		If it's neither then reply with only a 'INVALID' only. Do not say things like "This is not related to linux", just say INVALID and quit.
 		If not, generate an explaination of the following level- `,input)
 
 	switch level{
@@ -81,12 +81,12 @@ func explain (input string,manpages string,level string) (string,error){
 		`
 	}
 
-	prompt+=fmt.Sprintf(`Here are relevant man pages that you should use to explain the input text:
+	prompt+=fmt.Sprintf(`Write everything in plain text (no code insertion) Here are relevant man pages that you should use to explain the input text:
 
 	%s
 
 	(Note that man pages may not exist, in which case you are to generate an explaination using your knowledge adhering to the rules above)
-	Do not address the user EVER, explain it formally`,manpages)
+	Do not address the user EVER, explain it formally. YOUR OUTPUT MUST CONTAIN ONLY INFORMATION. IT MUST NOT CONTAIN REDUNDANT NON IMPORTANT STUFF LIKE NATURE OF TEXT, WHETHER ITS A COMMAND OR PROMPT, THOSE THINGS ARE NOT IMPORTANT`,manpages)
 
 
 	key:=os.Getenv("OMNIPEN_API_KEY")

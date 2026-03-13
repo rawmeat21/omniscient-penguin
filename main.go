@@ -4,13 +4,15 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"os/exec"
 	"strings"
+
 	"github.com/joho/godotenv"
 )
 
 func main(){
 	godotenv.Load()
-	fmt.Println("Welcome to Omniscient Penguin!")
+	fmt.Println(ColourPrompt+"Welcome to Omniscient Penguin!"+ColourReset)
 	fmt.Println("Type a linux command to get an explanation or type what you want")
 	fmt.Println("Type quit() to exit")
 	fmt.Println()
@@ -18,8 +20,9 @@ func main(){
 
 	sc:=bufio.NewScanner(os.Stdin)
 
+	promptText:=ColourPrompt+"omnipen: "+ColourReset
 	for{
-		fmt.Print("omnipen: ")
+		fmt.Print(promptText)
 		sc.Scan()
 		input:=sc.Text()
 
@@ -27,10 +30,18 @@ func main(){
 			break
 		}
 
+		if input=="clear()"{
+			cmd:=exec.Command("clear")
+			cmd.Stdout=os.Stdout	
+			cmd.Run()
+			continue
+		}
+
 		level:="h"
 
 		for{
-			fmt.Print("omnipen: How low do you want to go (h, m or l) (default= h) ? ")
+			fmt.Print(promptText)
+			fmt.Print("How low do you want to go (h, m or l) (default= h) ? ")
 			sc.Scan()
 			c:=sc.Text()
 
@@ -49,7 +60,8 @@ func main(){
 			case "":
 				proper=true
 			default:
-				fmt.Println("omnipen: Please enter either h, m or l")
+				fmt.Print(promptText)
+				fmt.Println(ColourWarning+"Please enter either h, m or l"+ColourReset)
 			}
 
 			if proper{
@@ -62,7 +74,6 @@ func main(){
 
 		if(err==nil){
 			// input text is a linux command for sure
-			fmt.Println("Its a linux command")
 			for i:=0;i<len(words);i++{
 				manpages.WriteString(fmt.Sprintf("Man page for %s\n\n",words[i]))
 				manpages.WriteString("\n\n")
@@ -72,17 +83,21 @@ func main(){
 		output,err:=explain(input,manpages.String(),level)
 
 		if(err!=nil) {
-			fmt.Println("Sorry, there was a problem. Please try again later.")
+			fmt.Print(promptText)
+			fmt.Println(ColourError+"Sorry, there was a problem. Please try again later."+ColourReset)
 			continue
 		}
 
 		if output=="INVALID"{
-			fmt.Println("omnipen: You seem to have entered gibberish. Don't do that again.")
+			fmt.Print(promptText)
+			fmt.Println(ColourWarning+"You seem to have entered gibberish. Don't do that again."+ColourReset)
 			continue
 		}
 
 		fmt.Println()
-		fmt.Print(output)
+		fmt.Println()
+		fmt.Print("\033[93m"+output+ColourReset)
+		fmt.Println()
 		fmt.Println()	
 	}
 
